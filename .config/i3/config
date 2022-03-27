@@ -1,0 +1,185 @@
+set $mod Mod4
+focus_follows_mouse no
+font Inconsolata 8
+#bindsym $mod+Shift+Escape						exec "i3-nagbar -t warning -m 'I will be back.' -b 'Bye.' 'i3-msg exit'"
+
+##pywal
+
+	set_from_resource $fg i3wm.color7 #f0f0f0
+	set_from_resource $bg i3wm.color2 #f0f0f0
+
+	# class                 border  backgr. text indicator child_border
+	client.focused          $bg     $bg     $fg  #ffffff     $bg
+	#client.focused_inactive $bg     $bg     $fg #ffffff      $bg
+	#client.unfocused        $bg     $bg     $fg #ffffff      $bg
+	client.urgent           $bg     $bg     $fg  #ffffff     $bg
+	client.placeholder      $fg     $fg     $fg  #ffffff     $fg
+
+	client.background       $bg
+	# PROTIP: You can also dynamically set dmenu's colors this way:
+##/pywal
+
+
+	#client.background       $bg
+
+bindsym $mod+Shift+r restart
+#startups
+#exec_always --no-startup-id	wal
+exec_always --no-startup-id feh --bg-scale /home/frnkq/Downloads/Firefox_Wallpaper.png
+exec_always $HOME/.config/polybar/launch_polybar.sh
+
+
+#exec     $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id	nm-applet
+exec_always --no-startup-id	blueman-applet
+exec_always --no-startup-id	feh --bg-fill $HOME/Pictures/Wallpapers/default.png
+exec_always --no-startup-id	compton --config $HOME/.config/compton.conf   #composite
+exec_always --no-startup-id	unclutter -idle 3 -jitter 20 #mouse hide
+exec_always --no-startup-id      dunst
+exec																i3-battery-popup -n
+
+#startup layout
+
+#exec --no-startup-id i3-msg 'workspace 6;exec firefox --new-window https://web.whatsapp.com'
+#exec --no-startup-id i3-msg 'workspace 6;exec firefox --new-window localhost:8096'
+#exec --no-startup-id exec urxvt -name floatingTerm
+
+#bindsym
+#bindsym	$mod+w exec 		"wal -i $HOME/Pictures/Wallpapers -o wal-set"
+bindsym $mod+Shift+f              exec lxdm -c USER_SWITCH
+bindsym	$mod+Control+l 	        exec $HOME/.config/Scripts/lock.sh
+bindsym $mod+d exec             dmenu_run -fn "xft:Inconsolata:size=10"
+bindsym $mod+Shift+d exec             $HOME/scripts/dmenu_cd.sh
+#bindsym $mod+Control+Shift+d exec             $HOME/scripts/dmenu_urxvt_cd_on_http.sh
+#bindsym $mod+Shift+d exec             $HOME/scripts/dmenu_urxvt_cd_on_http.sh
+bindsym $mod+Return 		exec urxvt
+bindsym $mod+p          exec pcmanfm
+bindsym $mod+e 		      exec urxvt -name ranger -e ranger
+bindsym $mod+v 		      exec urxvt -name vim -e vim
+bindsym $mod+Print 	  	exec scrot -e 'mv $f ~/Pictures/Screenshots'
+#bindsym --release $mod+Shift+Print 	exec scrot -s -e 'mv $f ~/Pictures'
+bindsym --release $mod+Shift+Print 	exec scrot '/tmp/%F_%T_$wx$h.png' -s -e 'xclip -selection clipboard -target image/png -i $f'
+bindsym $mod+n 			    exec urxvt -e neofetch -S ~/Pictures/Screenshots/
+bindsym $mod+Escape		scratchpad show
+bindsym $mod+Shift+Escape	move scratchpad
+bindsym $mod+Tab                workspace back_and_forth
+
+#$mod+return term float
+for_window [instance="^floatingTerm$"] floating enable
+for_window [instance="^floatingTerm$"] exec transset-df -n ^floatingTerm$ 0.8
+
+#todofloat
+for_window [instance="^toDoFloatingTerm$"] floating enable
+for_window [instance="^toDoFloatingTerm$"] exec transset-df -n ^toDoFloatingTerm$ 0.8
+
+#vim float
+for_window [instance="^vim$"] floating enable
+for_window [instance="^vim$"] exec transset-df -n ^dropdown$ 0.8
+#
+#ranger float
+for_window [instance="^ranger$"] floating enable
+for_window [instance="^ranger$"] exec transset-df -n ^dropdown$ 0.8
+
+
+#i3-gaps
+for_window [class="^.*"] 	border pixel 5
+gaps 				inner 15
+bindsym 			$mod+Shift+s	gaps inner current plus 5
+bindsym 			$mod+Shift+Control+s gaps inner current minus 5
+bindsym				$mod+s sticky toggle
+
+#Layout, Windows
+##layout
+bindsym 			$mod+Shift+space floating toggle
+bindsym 			$mod+t split toggle
+for_window [instance="^toDoFloatingTerm$"] floating_enable
+##windows
+bindsym $mod+Shift+q kill
+bindsym $mod+f fullscreen toggle
+
+##change focus
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+h focus left
+
+##float move
+bindsym $mod+Shift+j move down 100
+bindsym $mod+Shift+k move up 100
+bindsym $mod+Shift+l move right 100
+bindsym $mod+Shift+h move left 100
+
+##float move precise
+bindsym $mod+Shift+Control+j move down 10
+bindsym $mod+Shift+Control+k move up 10
+bindsym $mod+Shift+Control+l move right 10
+bindsym $mod+Shift+Control+h move left 10
+
+##resize
+bindsym $mod+Shift+Control+i resize shrink height 50 px or 50 ppt
+bindsym $mod+Shift+Control+u resize grow height 50 px or 50 ppt
+bindsym $mod+Shift+Control+y resize shrink width 50 px or 50 ppt
+bindsym $mod+Shift+Control+o resize grow width 50 px or 50 ppt
+
+##resize precise
+bindsym $mod+Shift+i resize shrink height 10 px or 10 ppt
+bindsym $mod+Shift+u resize grow height 10 px or 10 ppt
+bindsym $mod+Shift+o resize shrink width 10 px or 10 ppt
+bindsym $mod+Shift+y resize grow width 10 px or 10 ppt
+
+##transparency
+bindsym $mod+F7	exec transset-df -a --dec .10
+bindsym $mod+F8 exec transset-df -a --inc .10
+
+#workspaces 
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+workspace 1 output eDP-1
+workspace 2 output eDP-1
+workspace 3 output eDP-1
+workspace 4 output eDP-1
+workspace 5 output eDP-1
+workspace 6 output HDMI-1
+workspace 7 output HDMI-1
+workspace 8 output HDMI-1
+workspace 9 output HDMI-1
+workspace 0 output HDMI-1
+
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+bindsym XF86PowerOff		exec sudo shutdown -h now
+bindsym XF86Sleep		exec sudo zzz
+#bindsym XF86AudioPrev		exec --no-startup-id mocp -r
+#bindsym XF86AudioPlay		exec --no-startup-id mocp -G
+#bindsym XF86AudioNext		exec --no-startup-id mocp -f
+bindsym XF86AudioMute		exec --no-startup-id amixer sset Master toggle
+##INVERTED due to shitty keyboard
+bindsym XF86AudioRaiseVolume	exec --no-startup-id amixer sset Master 5%+
+bindsym XF86AudioLowerVolume	exec --no-startup-id amixer sset Master 5%-
+bindsym XF86AudioMicMute	exec --no-startup-id amixer sset Capture toggle
+bindsym XF86MonBrightnessDown	exec --no-startup-id light -U 15
+bindsym XF86MonBrightnessUp	exec --no-startup-id light -A 15
+bindsym XF86Display		exec --no-startup-id /home/frnkq/.screenlayout/thnkDownMonUp.sh
+bindsym Shift+XF86Display	exec --no-startup-id /home/frnkq/.screenlayout/default.sh
+##EMBY through curl
+bindsym XF86AudioNext		exec --no-startup-id /home/frnkq/scripts/embyControl -next
+bindsym XF86AudioPrev		exec --no-startup-id /home/frnkq/scripts/embyControl -prev
+bindsym XF86AudioPlay		exec --no-startup-id /home/frnkq/scripts/embyControl -playPause
