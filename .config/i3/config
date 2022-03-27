@@ -23,63 +23,22 @@ font Inconsolata 8
 	#client.background       $bg
 
 bindsym $mod+Shift+r restart
+
 #startups
-#exec_always --no-startup-id	wal
-exec_always --no-startup-id feh --bg-scale /home/frnkq/Downloads/Firefox_Wallpaper.png
-exec_always $HOME/.config/polybar/launch_polybar.sh
+exec compton
+exec $HOME/.config/polybar/launch_polybar.sh
 
-
-#exec     $HOME/.config/polybar/launch.sh
-exec_always --no-startup-id	nm-applet
 exec_always --no-startup-id	blueman-applet
-exec_always --no-startup-id	feh --bg-fill $HOME/Pictures/Wallpapers/default.png
-exec_always --no-startup-id	compton --config $HOME/.config/compton.conf   #composite
 exec_always --no-startup-id	unclutter -idle 3 -jitter 20 #mouse hide
 exec_always --no-startup-id      dunst
-exec																i3-battery-popup -n
 
-#startup layout
-
-#exec --no-startup-id i3-msg 'workspace 6;exec firefox --new-window https://web.whatsapp.com'
-#exec --no-startup-id i3-msg 'workspace 6;exec firefox --new-window localhost:8096'
-#exec --no-startup-id exec urxvt -name floatingTerm
-
-#bindsym
-#bindsym	$mod+w exec 		"wal -i $HOME/Pictures/Wallpapers -o wal-set"
-bindsym $mod+Shift+f              exec lxdm -c USER_SWITCH
-bindsym	$mod+Control+l 	        exec $HOME/.config/Scripts/lock.sh
 bindsym $mod+d exec             dmenu_run -fn "xft:Inconsolata:size=10"
-bindsym $mod+Shift+d exec             $HOME/scripts/dmenu_cd.sh
-#bindsym $mod+Control+Shift+d exec             $HOME/scripts/dmenu_urxvt_cd_on_http.sh
-#bindsym $mod+Shift+d exec             $HOME/scripts/dmenu_urxvt_cd_on_http.sh
+bindsym $mod+Shift+d exec             $HOME/Scripts/dmenu_cd.sh
 bindsym $mod+Return 		exec urxvt
-bindsym $mod+p          exec pcmanfm
-bindsym $mod+e 		      exec urxvt -name ranger -e ranger
-bindsym $mod+v 		      exec urxvt -name vim -e vim
-bindsym $mod+Print 	  	exec scrot -e 'mv $f ~/Pictures/Screenshots'
-#bindsym --release $mod+Shift+Print 	exec scrot -s -e 'mv $f ~/Pictures'
 bindsym --release $mod+Shift+Print 	exec scrot '/tmp/%F_%T_$wx$h.png' -s -e 'xclip -selection clipboard -target image/png -i $f'
-bindsym $mod+n 			    exec urxvt -e neofetch -S ~/Pictures/Screenshots/
 bindsym $mod+Escape		scratchpad show
 bindsym $mod+Shift+Escape	move scratchpad
 bindsym $mod+Tab                workspace back_and_forth
-
-#$mod+return term float
-for_window [instance="^floatingTerm$"] floating enable
-for_window [instance="^floatingTerm$"] exec transset-df -n ^floatingTerm$ 0.8
-
-#todofloat
-for_window [instance="^toDoFloatingTerm$"] floating enable
-for_window [instance="^toDoFloatingTerm$"] exec transset-df -n ^toDoFloatingTerm$ 0.8
-
-#vim float
-for_window [instance="^vim$"] floating enable
-for_window [instance="^vim$"] exec transset-df -n ^dropdown$ 0.8
-#
-#ranger float
-for_window [instance="^ranger$"] floating enable
-for_window [instance="^ranger$"] exec transset-df -n ^dropdown$ 0.8
-
 
 #i3-gaps
 for_window [class="^.*"] 	border pixel 5
@@ -92,7 +51,7 @@ bindsym				$mod+s sticky toggle
 ##layout
 bindsym 			$mod+Shift+space floating toggle
 bindsym 			$mod+t split toggle
-for_window [instance="^toDoFloatingTerm$"] floating_enable
+
 ##windows
 bindsym $mod+Shift+q kill
 bindsym $mod+f fullscreen toggle
