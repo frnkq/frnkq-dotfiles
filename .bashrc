@@ -14,6 +14,7 @@ alias gcm='git commit -m'
 alias gcma='git commit --amend -m'
 alias gpsh='git push'
 alias gchko='git checkout'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 alias phpunit='/home/frnkq/programming/bmba/api/vendor/bin/phpunit'
 alias bmbapi='cd programming/bmba/api/ && php artisan serve --port=1215'
