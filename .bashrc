@@ -28,3 +28,4 @@ export ANDROID_HOME=$ANDROID_SDK_ROOT
 export JAVA_HOME="/usr/lib/jvm/default"
 export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
 HISTSIZE=
+source /usr/share/nvm/init-nvm.sh
