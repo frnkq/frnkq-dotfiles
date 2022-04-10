@@ -57,12 +57,9 @@ let g:closetag_regions = {
     \ 'javascriptreact': 'jsxRegion',
     \ }
 
-
-"fast save
-map <leader>w :w!<cr>
-
 "NerdTree
 nnoremap <leader>n :NERDTreeToggle<CR>
+autocmd BufEnter NERD_tree_* | execute 'normal R'
 
 set laststatus=2
 set statusline=\ %{FugitiveStatusline()}%{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c 
@@ -102,7 +99,6 @@ inoremap {; {<CR>};<C-c>O
 inoremap {, {<CR>},<C-c>O
 inoremap [; [<CR>];<C-c>O
 inoremap [, [<CR>],<C-c>O]]}}))
-
 
 "Windows
 map <C-j> <C-W>j
