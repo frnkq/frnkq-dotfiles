@@ -58,6 +58,7 @@ let g:closetag_regions = {
     \ }
 
 "NerdTree
+autocmd VimEnter * NERDTree "autostart
 nnoremap <leader>n :NERDTreeToggle<CR>
 autocmd BufEnter NERD_tree_* | execute 'normal R'
 
