@@ -27,7 +27,7 @@ bindsym $mod+Shift+r restart
 #startups
 exec picom
 exec .screenlayout/samsung24left_lg29mid.sh
-exec $HOME/.config/polybar/launch_polybar.sh
+exec_always $HOME/.config/polybar/launch_polybar.sh
 exec_always feh --bg-fill /home/frnkq/Pictures/wallpaper.jpg
 exec "setxkbmap -layout es"
 exec_always --no-startup-id	blueman-tray
