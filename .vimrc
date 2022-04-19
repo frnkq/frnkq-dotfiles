@@ -16,6 +16,7 @@ call plug#begin()
     Plug 'ajmwagar/vim-emoticons'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'sheerun/vim-polyglot' 
+    Plug 'junegunn/fzf', { 'do': { -> fz#install() }}
 call plug#end()
 
 
@@ -61,6 +62,8 @@ let g:closetag_regions = {
 autocmd VimEnter * NERDTree "autostart
 nnoremap <leader>n :NERDTreeToggle<CR>
 autocmd BufEnter NERD_tree_* | execute 'normal R'
+
+nnoremap <leader>p :FZF<CR>
 
 set laststatus=2
 set statusline=\ %{FugitiveStatusline()}%{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c 
